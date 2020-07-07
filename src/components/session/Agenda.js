@@ -42,7 +42,7 @@ const Agenda = ({ user1 }) => {
                         })
                     }
                 </div>
-                <div>
+                <div className='m-3'>
                     <h3>Tal vez asistiré</h3>
                     {
                         talvez.map((arr, index) => {
