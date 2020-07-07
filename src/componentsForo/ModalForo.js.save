@@ -1,0 +1,63 @@
+import React, {useState, useEffect} from 'react';
+import Modal from 'react-bootstrap/Modal'
+import ModalBody from 'react-bootstrap/ModalBody'
+import Row from 'react-bootstrap/Row'
+import Col from 'react-bootstrap/Col'
+import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
+import axios from 'axios'
+
+
+const ModalForo = (props) =>{
+    const[comment,setComment]= useState('')
+
+    const handleChanges = (e) =>{
+      setComment(e.target.value)
+    }
+    const handleClick = () =>{
+      const fechaHComment = new Date()
+      const arrfechaHComment = [fechaHComment.getDate(), fechaHComment.getMonth(), fechaHComment.getDate()]
+      const arrfechaHComment = [fech]  
+      alert("¡Tu mensaje ha sido enviado!")
+
+      const commentsJson={
+        "id_comments": 2,
+        "user_comments": "Jacinto",
+        "date": fecha,
+        "time": "12:39:34",
+        "comment": comment
+      }
+              axios.post(`https://us-central1-aglomer-9c6d9.cloudfunctions.net/place/${props.name}`,commentsJson)
+
+    }
+    
+    return(
+        <Modal show={props.show} onHide={props.onHide} size="lg " aria-labelledby="contained-modal-title-vcenter" centered>
+          <Modal.Header closeButton></Modal.Header>
+          <ModalBody>
+            <Container>
+              <Row>
+                <Col sm={4}><img width="221px" height="160px" variant="top" src={props.image} /><h6>{props.name}</h6></Col>
+                <Col>
+                {
+                  props.comments.map((arr,ind)=>{
+                    return(
+                    <Row key={ind}><Col><p style={{width:"25fr"}} placeholder="Comentario"><h6>Comentario</h6>{arr.comment}</p></Col></Row>
+                    )
+                    })
+                  }
+                  <Row><Col><textarea style={{width:"25rem"}} placeholder="Deja tu comentario... " value={comment} onChange={handleChanges}></textarea></Col></Row>
+
+                  <Row><Button onClick={handleClick}>Enviar</Button></Row>
+
+                
+                </Col>
+              </Row>
+            </Container>
+          </ModalBody>
+        </Modal>
+    );
+}
+
+
+export default ModalForo;
