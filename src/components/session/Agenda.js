@@ -14,7 +14,7 @@ const Agenda = ({ user1 }) => {
     const [asistir, setAsistir] = useState([]);
     const [talvez, setTalvez] = useState([])
     useEffect(() => {
-        axios.get(`https://us-central1-aglomer-9c6d9.cloudfunctions.net/user/AD GC`)
+        axios.get(`https://us-central1-aglomer-9c6d9.cloudfunctions.net/user/Angie Eslava`)
             .then(res => {
                 const dataUser = res.data
                 setAsistir(dataUser.agendaAsistir);
