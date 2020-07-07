@@ -23,8 +23,8 @@ firebase.auth().onAuthStateChanged((user) => {
       'email': user.email,
       'photo': user.photoURL,
       'phone': user.providerData[0].phoneNumber,
-      'agendaAsistir':[],
-      'agendaTalvez':[]	
+      'agendaAsistir': [],
+      'agendaTalvez': []
     }
     axios.post('https://us-central1-aglomer-9c6d9.cloudfunctions.net/user', userJson);
     store.dispatch(setUser(user));

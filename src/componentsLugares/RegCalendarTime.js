@@ -29,6 +29,11 @@ const RegCalendarTime = ({ show, onHide, name2, user, type, selT, number }) => {
 
 
     const changeDate = (dateP) => {
+        // let fecha1 = [
+        //     dateP.getMonth(),
+        //     dateP.getFullYear(),
+        //     dateP.getDate()
+        // ]
         setDate(dateP)
     }
 
@@ -38,7 +43,7 @@ const RegCalendarTime = ({ show, onHide, name2, user, type, selT, number }) => {
         let d = new Date();
         let dFecha = [d.getDate(), d.getMonth(), d.getFullYear()];
         let timeTotal = [d.getHours(), d.getMinutes(), d.getSeconds()];
-        
+
         //setFecha(dFecha.join('/'));
         //setTime(timeTotal.join(':'));
         const userJson = {
@@ -46,10 +51,10 @@ const RegCalendarTime = ({ show, onHide, name2, user, type, selT, number }) => {
             'date': dFecha.join('/'),
             'time': timeTotal.join(':')
         }
-        const agendaJson= {
-            'horaPlan' : hora,
-            'fechaPlan' : date,
-            'lugar' : name2
+        const agendaJson = {
+            'horaPlan': hora,
+            'fechaPlan': date.toString().substring(4,15),
+            'lugar': name2
         }
 
         axios.post(`https://us-central1-aglomer-9c6d9.cloudfunctions.net/user/${user.displayName}/${number}`, agendaJson)
@@ -63,7 +68,7 @@ const RegCalendarTime = ({ show, onHide, name2, user, type, selT, number }) => {
 
     const onHandleHora = (e) => { setHora(e.target.value) }
 
-    console.log(hora);
+    // console.log(date.toString().substring(0,15));
     return (
         <Modal show={show} onHide={onHide} animation={false}>
             <Modal.Header closeButton></Modal.Header>

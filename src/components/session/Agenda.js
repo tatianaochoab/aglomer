@@ -1,29 +1,30 @@
 import React, { useState, useEffect } from 'react';
-import { connect } from 'react-redux'
 import axios from 'axios';
 
-const mapProps = (state) => {
-    return {
-        user1: state.user
-    }
-}
 
-
-
-const Agenda = ({ user1 }) => {
+const Agenda = (props) => {
     const [asistir, setAsistir] = useState([]);
-    const [talvez, setTalvez] = useState([])
+    const [talvez, setTalvez] = useState([]);
+
+    if (props.user) {
+        var name = props.user.displayName
+    }
+
     useEffect(() => {
-        axios.get(`https://us-central1-aglomer-9c6d9.cloudfunctions.net/user/Angie Eslava`)
-            .then(res => {
-                const dataUser = res.data
-                setAsistir(dataUser.agendaAsistir);
-                setTalvez(dataUser.agendaTalvez);
-                console.log(dataUser)
-            })
+        if (props.user) {
+            axios.get(`https://us-central1-aglomer-9c6d9.cloudfunctions.net/user/${props.user.displayName}`)
+                .then(res => {
+                    const dataUser = res.data
+                    setAsistir(dataUser.agendaAsistir);
+                    setTalvez(dataUser.agendaTalvez);
+                    console.log(dataUser)
+                })
+        }
     }, []);
     console.log(asistir)
-    console.log(user1)
+
+
+    console.log(name)
     return (
         <div className='container-agenda'>
             <div className='agenda'>
@@ -61,4 +62,4 @@ const Agenda = ({ user1 }) => {
     )
 }
 
-export default connect(mapProps)(Agenda)
+export default Agenda;
